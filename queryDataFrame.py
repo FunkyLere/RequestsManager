@@ -66,7 +66,7 @@ def queryDetallePAO(database, pID):
                 
     mainQuery = f'\
                 SELECT DISTINCT S.pID, S.descripcion, E.nombre, S.cID, S.importe,\
-                    sub.razon, sub.inicio, sub.fin, sub.remanente_destinado,\
+                    Contratista.razon, sub.inicio, sub.fin, sub.remanente_destinado,\
                     sub.consumido_destinado, sub.importe_destinado, sub.remanente_total,\
                     sub.consumido_total, sub.importe_total,\
                    	(\
@@ -97,7 +97,7 @@ def queryDetallePAO(database, pID):
                 FROM Estacion E, Solicitud S, Contratista, Contrato\
                 LEFT JOIN\
             	(\
-                	SELECT DISTINCT razon, inicio, fin, remanente_destinado, \
+                	SELECT DISTINCT inicio, fin, remanente_destinado, \
                         consumido_destinado, importe_destinado, remanente_total, \
                         (Contrato.importe_total - rem_tot.remanente_total) as consumido_total, \
                         importe_total \
@@ -117,7 +117,7 @@ def queryDetallePAO(database, pID):
                 	and Contratista.CIF = Contrato.CIF and S.cID = Contrato.cID\
                 ) Sub\
                 ON S.cID = Contrato.cID \
-                WHERE S.pID = {pID} and E.eID = S.eID\
+                WHERE S.pID = {pID} and E.eID = S.eID and S.CIF = Contratista.CIF\
                 ;'
                                 
     citiesQuery = f'\
