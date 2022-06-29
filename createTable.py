@@ -85,7 +85,8 @@ def main():
                                         categoria_profesional text NOT NULL,
                                         usuario text NOT NULL UNIQUE,
                                         contraseña text NOT NULL,
-                                        foto BLOB
+                                        foto BLOB,
+                                        administrador text NOT NULL
                                         );"""
     
     sql_create_contrato_table = """CREATE TABLE IF NOT EXISTS Contrato (
@@ -96,7 +97,7 @@ def main():
                                         inicio text NOT NULL,
                                         fin text NOT NULL,
                                         importe_destinado real,
-                                        destinado_remanente real,
+                                        remanente_destinado real,
                                         importe_total real,
                                         PRIMARY KEY(cID, eID)                                        
                                         );"""
@@ -132,9 +133,9 @@ def main():
     sql_insert_trabajador_data = """INSERT INTO Trabajador
                                         (
                                             nombre, apellidos, categoria_profesional, 
-                                            usuario, contraseña, foto
+                                            usuario, contraseña, foto, administrador
                                         )
-                                        VALUES (?,?,?,?,?,?)"""
+                                        VALUES (?,?,?,?,?,?,?)"""
                                     
     sql_insert_contrato_data = """INSERT INTO Contrato
                                     VALUES (?,?,?,?,?,?,?,?,?)"""
@@ -166,8 +167,8 @@ def main():
     trabajadores = [
                        ('Juan', 'García Estrada', 'Jefe de control de gestión y administración',
                         'jgarcia', '1234', 
-                        convertToBinaryData('D:/Programacion/GestorPeticiones/foto_1.png')),
-                       ('María', 'González Suarez', 'Subdirectora estaciones noroeste', 'mgonzalez', '1234', None) 
+                        convertToBinaryData('D:/Programacion/GestorPeticiones/foto_1.png'), 'No'),
+                       ('María', 'González Suarez', 'Subdirectora estaciones noroeste', 'mgonzalez', '1234', None, 'Si') 
                     ]
     
     contratos = [
