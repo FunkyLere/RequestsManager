@@ -18,8 +18,6 @@ def query(statement, database):
     
     return DFresult
 
-# print(query('SELECT usuario, contraseña FROM Trabajador WHERE usuario = 'jgarcia';', data))
-
 def queryRegistro(database):
     
     """
@@ -128,11 +126,3 @@ def queryDetallePAO(database, pID):
     DataFrame = pd.read_sql_query(mainQuery, conn)
     
     return DataFrame
-
-# df = queryRegistro(data)
-# print(type(df['cID'][1]))
-# print(df)
-
-df = queryDetallePAO(data, '0001')
-# print(type(df['cID'][1]))
-print(df)
